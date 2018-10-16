@@ -40,3 +40,13 @@ Vous y trouverez :
 [https://elbixos.github.io/L1_OptionInfo/Cours/Cours/99_sommaire.html](https://elbixos.github.io/L1_OptionInfo/Cours/Cours/99_sommaire.html)
 - le tutoriel sur pygame :
 [https://elbixos.github.io/L1_OptionInfo/Projets/JeuVideo/Cours/cours.html](https://elbixos.github.io/L1_OptionInfo/Projets/JeuVideo/Cours/cours.html)
+
+## Enoncé des TP / notation / ...
+Le contenu de chaque TP dépendra essentiellement de votre avancement. Vos encadrant sont la pour vous guider et vous proposeront des étapes à réaliser a chaque fois, en fonction du jeu choisi.
+
+Une notation d'avancement est effectuée au début de chaque cours. Une évaluation finale vient compléter la note. Ne comptez donc pas vous y mettre au dernier moment, ce serait contre productif car :
+
+1. vous n'auriez pas le temps de faire quelque chose de bien.
+2. la note d'avancement de chaque TP serait faible.
+
+Bonne chance !
