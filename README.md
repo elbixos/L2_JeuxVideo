@@ -1,4 +1,4 @@
-# L2_JeuxVideo
+# L2 : Jeux Video et Maths
 
 Le cours d'option Jeux Vidéos et maths en Licence Info 2eme année à l'université des Antilles
 
@@ -48,5 +48,9 @@ Une notation d'avancement est effectuée au début de chaque cours. Une évaluat
 
 1. vous n'auriez pas le temps de faire quelque chose de bien.
 2. la note d'avancement de chaque TP serait faible.
+
+Au début de chaque séance, je vous fournirais une liste de tâches a effectuer pour la semaine suivante. La réalisation de ces tâches amène une note de 12/20. Pour avoir plus, faites en plus...
+Ces tâches sont rassemblées dans le fichier [avancee](avancee.md)
+
 
 Bonne chance !
