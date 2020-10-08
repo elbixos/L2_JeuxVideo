@@ -39,7 +39,7 @@ Vous y trouverez :
 - un cours rapide de python :
 [https://elbixos.github.io/L1_OptionInfo/Cours/Cours/99_sommaire.html](https://elbixos.github.io/L1_OptionInfo/Cours/Cours/99_sommaire.html)
 - le tutoriel sur pygame :
-[https://elbixos.github.io/L1_OptionInfo/Projets/JeuVideo/Cours/cours.html](https://elbixos.github.io/L1_OptionInfo/Projets/JeuVideo/Cours/cours.html)
+[C'est ici](tutos/tuto.md)
 
 ## Enoncé des TP / notation / ...
 Le contenu de chaque TP dépendra essentiellement de votre avancement. Vos encadrant sont la pour vous guider et vous proposeront des étapes à réaliser a chaque fois, en fonction du jeu choisi.
