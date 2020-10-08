@@ -1,0 +1,1 @@
+pandoc -s -V geometry:a4paper -o tuto.pdf tuto.md
