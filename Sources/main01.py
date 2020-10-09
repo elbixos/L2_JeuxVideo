@@ -72,6 +72,9 @@ while continuer == True :
     # raffraichissement de l'ecran
     pygame.display.flip()
 
+    if touches[pygame.K_ESCAPE]:
+        continuer=False
+
 
     # On vide la pile d'evenements et on verifie certains evenements
     for event in evenements:   # parcours de la liste des evenements recus
