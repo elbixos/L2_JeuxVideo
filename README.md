@@ -44,7 +44,7 @@ Vous y trouverez :
 
 ## Point de départ
 
-- [main.py](Sources/main.py)
+- [main.py](Sources/main01.py)
 - [toutBiten.py](Sources/toutBiten.py)
 
 ## Enoncé des TP / notation / ...
