@@ -41,6 +41,12 @@ Vous y trouverez :
 - le tutoriel sur pygame :
 [C'est ici](tutos/tuto.md)
 
+
+## Point de départ
+
+- [main.py](Sources/main.py)
+- [toutBiten.py](Sources/toutBiten.py)
+
 ## Enoncé des TP / notation / ...
 Le contenu de chaque TP dépendra essentiellement de votre avancement. Vos encadrant sont la pour vous guider et vous proposeront des étapes à réaliser a chaque fois, en fonction du jeu choisi.
 
