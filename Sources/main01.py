@@ -1,5 +1,6 @@
 from toutBiten import *
 import pygame
+import random
 
 def lireImages():
   images = {}
@@ -14,8 +15,9 @@ def lireImages():
   return images
 
 def ajouterBalles(balles, compteur, fps, duree):
-  if compteur/fps == duree:
-    balles.append(ElementGraphique(fenetre,images["balle"],largeur/2, hauteur/2))
+  if compteur/fps % duree==0:
+    balles.append(ElementGraphique(fenetre,images["balle"],random.randint(0,largeur), random.randint(0,hauteur)))
+
 
 ## Initialisation de la fenetre et crÃ©ation
 pygame.init()
@@ -57,8 +59,8 @@ while continuer == True :
     touches = pygame.key.get_pressed();
     evenements = pygame.event.get()
 
-    # on ajoute des balles toutes les 5 secondes.
-    ajouterBalles(balles, time, fps, 5)
+    # on ajoute des balles toutes les 1 secondes.
+    ajouterBalles(balles, time, fps, 1)
 
 
     # Affichage des elements
@@ -68,6 +70,7 @@ while continuer == True :
 
     for b in balles:
         b.afficher()
+        print(b.rect)
 
     # raffraichissement de l'ecran
     pygame.display.flip()
