@@ -43,8 +43,14 @@ Vous y trouverez :
 
 
 ## Point de départ
+Ci dessous le lien vers différents fichiers vus en cours :
 
-- [main.py](Sources/main01.py)
+Les différents programmes principaux vus en cours
+- [main01.py](Sources/main01.py) : Que des Elements Graphiques
+- [main02.py](Sources/main02.py) : Ajout de la classe Joueur pour le deplacer
+- [main03.py](Sources/main03.py) : Ajout de la classe DeplacementLineaire pour deplacer les balles
+
+Les fichiers contenant les classes :
 - [toutBiten.py](Sources/toutBiten.py)
 
 ## Enoncé des TP / notation / ...
