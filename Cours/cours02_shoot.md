@@ -288,6 +288,16 @@ Voila qui peut enrichir rapidement votre projet de jeu video et changera un peu 
 A vous de jouer avec tout cela...
 Sachez qu'il en existe aussi de nombreuses autres, dessinant des coeurs, ou toutes sortes de figures complexes potentiellement utiles.
 
-Pour info, le code ayant généré la plupart des courbes de cette page est disponible et exécutable en ligne.
+## Du code tout prêt
+
+Comme toujours, le code présenté existe sous forme de fichiers tout prêts :
+
+- [toutBiten.py](Sources/toutBiten.py) qui contient les classes utiles
+- [main04.py](Sources/main04.py) qui contient programme principal
+
+
+Pour info, le code ayant généré la plupart des courbes de cette page est aussi disponible et **exécutable en ligne**.
 Il suffit de suivre [ce lien](https://colab.research.google.com/drive/1KJVua7l1PqoIMkp_j9yGb3cddidT9VwE?usp=sharing).
 Il vous faudra néanmoins un compte chez Google pour l'exécuter.
+
+Bon travail.
