@@ -1,4 +1,5 @@
 import pygame
+import math
 
 class ElementGraphique():
     # Le constructeur basique
@@ -17,7 +18,7 @@ class ElementGraphique():
 
 class DeplacementLineaire(ElementGraphique):
     def __init__(self, window, img, x=0, y=0):
-        ElementGraphique.__init__(self, window, img, x=0, y=0)
+        ElementGraphique.__init__(self, window, img, x, y)
         self.dx = 3
         self.dy = 4
 
@@ -25,6 +26,34 @@ class DeplacementLineaire(ElementGraphique):
         self.rect.x+=self.dx
         self.rect.y+=self.dy
 
+class DeplacementTordu(ElementGraphique):
+    def __init__(self, window, img, x=0, y=0):
+        ElementGraphique.__init__(self, window, img, x, y)
+        self.t = 0.0
+        self.truc = 10
+        self.centerx = x
+        self.centery = y
+
+    def deplacer(self):
+        self.t+=1.0
+
+        self.rect.x = 100*math.cos(self.t/self.truc) + self.centerx
+        self.rect.y = 100*math.sin(self.t/self.truc) + self.centery
+
+class Teleguide(ElementGraphique):
+    def __init__(self, window, img, x=0, y=0):
+        ElementGraphique.__init__(self, window, img, x, y)
+        self.vitesse = 10.0
+
+    def deplacer(self, target):
+        dx = target.rect.x - self.rect.x
+        dy = target.rect.y - self.rect.y
+
+        dist = math.sqrt(dx*dx + dy*dy)
+        dx= dx / dist * self.vitesse
+        dy = dy /dist * self.vitesse
+        self.rect.x += dx
+        self.rect.y += dy
 
 class Joueur(ElementGraphique):
     def __init__(self, window, img, x=0, y=0):
