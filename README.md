@@ -41,8 +41,13 @@ Vous y trouverez :
 - le tutoriel sur pygame :
 [C'est ici](tutos/tuto.md)
 
+## Les cours pour le Shoot Em Up
+
+- Cours 1 : Rappels sur les classes et la POO
+- [Cours 2](Cours/cours02_shoot.md) : les courbes paramétriques
 
 ## Point de départ
+
 Ci dessous le lien vers différents fichiers vus en cours :
 
 Les différents programmes principaux vus en cours
