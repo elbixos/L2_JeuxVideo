@@ -206,3 +206,83 @@ while continuer == True :
 Vous devriez voir quelque chose comme ceci :
 
 ![cercle pygame](pygameCercle.png)
+
+Cool. A ce stade, je vous conseille d'essayer de faire le rayon du cercle, son centre, et la vitesse a laquelle on se déplace sur le cercle, en modifiant seulement le code de la fonction *deplacer*.
+
+Vous devriez être en mesure de lui faire faire une ellipse au lieu d'un cercle...
+
+
+Mais les trucs vraiment classe arrivent maintenant...
+
+## Descente sinusoidale.
+Imaginons que je veuille que les ennemis descendent en faisant une belle sinusoide :
+
+![sinusoide](sinus.png)
+
+Facile :
+- On garde le cosinus sur x
+- et la position en y suit simplement les valeurs de t...
+
+Voici le code simplifié du déplacement :
+
+```python
+x = 50*cos(t/10) +250
+y = t
+```
+
+Incrustez ceci dans le code de pyghme et testez.
+vous pouvez essayer avec
+
+```python
+y=2*t
+```
+ou
+```python
+y=3*t
+```
+
+Quoi qu'il en soit, on sait maintenant définir une composante à *y* pour faire descendre notre objet à vitesse constante...
+
+## Cercle descendant
+
+Comment pourrais je avoir quelque chose comme
+une trajectoire circulaire, mais qui descende au fur et à mesure :
+
+![cercle descendant](cercleDecendant.png)
+
+Facile : Il suffit de reprendre l'equation du cercle, et de lui ajouter une composante qui descende.
+
+```python
+x = 50*cos(t/10) +250
+y = 50*sin(t/10) +200 +t
+```
+
+## Des courbes plus chelou
+
+Les courbes paramétriques sont un sujet d'étude assez commun en mathématiques, a tel point qu'on en connait de nombreuses. Pour nous, informaticiens, il suffit de chercher celles qui pourraient avoir un intérêt pour déplacer nos éléments de jeu vidéo selon des courbes intéressantes.
+
+Vous pourriez par exemple aller regarder ce lien :
+[https://fr.wikipedia.org/wiki/Courbe_de_Lissajous](https://fr.wikipedia.org/wiki/Courbe_de_Lissajous)
+
+qui en montre certaines, toutes ayant la forme simplifiée :
+```python
+x = 50*cos(p*t/10) +250
+y = 50*sin(q*t/10) +200
+```
+avec *p* et *q* entiers.
+
+
+Je vous mets ci dessous quelques exemples de ces courbes.
+Imaginez un boss qui se déplace comme ceci :
+
+![lissajou1](lissajous1.png)
+
+ou comme ceci.
+![lissajou2](lissajous2.png)
+
+ou encore
+![lissajou3](lissajous3.png)
+
+Voila qui peut enrichir rapidement votre projet de jeu video et changera un peu des déplacements tout moisis d'un space invaders...
+
+A vous de jouer avec tout cela...
