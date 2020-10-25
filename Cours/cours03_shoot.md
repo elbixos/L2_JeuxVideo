@@ -110,6 +110,14 @@ Voyons ce "aussi peu que possible"...
 
 ### Lecture des Images de l'animation
 
+----
+
+**Copyright/Attribution Notice** :
+Ces images ont été crées par Stephen Challener (Redshrike)
+et récupérées sur le site [opengameart](www.opengameart.org)
+
+----
+
 Il me faut des images pour l'animation. J'ai pris une flamme,
 avec 4 images... Chaque image a un nom de type *flameBall_X.png*
 avec *X* un entier.
