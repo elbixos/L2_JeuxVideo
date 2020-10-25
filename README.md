@@ -45,6 +45,7 @@ Vous y trouverez :
 
 - Cours 1 : Rappels sur les classes et la POO
 - [Cours 2](Cours/cours02_shoot.md) : les courbes paramétriques
+- [Cours 3](Cours/cours03_shoot.md) : les animations
 
 ## Point de départ
 
