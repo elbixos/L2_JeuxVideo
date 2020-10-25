@@ -626,4 +626,14 @@ je dois demander au joueur de se déplacer...
 joueur.deplacer(touches)
 ```
 
-Et voila.
+Et voila. Le truc bien, c'est que si mes ennemis doivent aussi avoir des animations directionnelles, ce n'est pas bien compliqué, j'ai fait le boulot une fois pour le joueur, je peux le refaire très vite pour d'autres éléments.
+
+
+Ma classe *ElementAnimDir* crée, il est intéressant de compter  
+les lignes à modifier pour basculer le joueur en *ElementAnimeDir*
+(hors lecture des images) :
+
+- dans la classe Joueur : 5 lignes au total
+- dans le main : 1 ligne
+
+Magique.
