@@ -416,6 +416,214 @@ Pour le coup, il vous faudrait avoir plus d'expérience pour savoir quel choix f
 
 ## Animation directionnelle.
 
-
-
 Imaginons que je veuille des animations différentes en fonction de la direction que prend mon personnage...
+
+Et voyons si on peut le faire, au moins conceptuellement.
+
+Encore une fois, il me faut des images...
+
+----
+Copyright/Attribution Notice:
+Art by Charles Gabriel. Commissioned by OpenGameArt.org (http://opengameart.org)
+
+---
+
+Ces images arrivent, comme souvent, sous la forme d'une seule image :
+
+![spritesheet](https://opengameart.org/sites/default/files/styles/medium/public/charsets_12_m-f_complete_by_antifarea_0.png)
+
+Comme je suis gentil, je les ai déja découpés moi meme pour en obtenir un certain nombre...
+
+Je ne vais m'occuper que de repos, gauche et droite.
+voici ces images :
+
+repos :
+![img](../Sources/Animations/wizard_down_0.png)
+
+gauche :
+![img](../Sources/Animations/wizard_left_0.png)
+![img](../Sources/Animations/wizard_left_1.png)
+![img](../Sources/Animations/wizard_left_2.png)
+
+droite :
+![img](../Sources/Animations/wizard_right_0.png)
+![img](../Sources/Animations/wizard_right_1.png)
+![img](../Sources/Animations/wizard_right_2.png)
+
+Il faut donc les stocker intelligemment.
+
+L'idée est que mon personnage va avoir une direction, et que pour cette direction, j'ai une animation qui va se jouer...
+
+On peut donc penser qu'il faut simplement gerer la direction du joueur.
+Je mettrais bien ca dans une string, c'est pratique.
+
+mon jeu va donc gérer la direction du personnage avec une chaine qui vaudra :
+- "repos" quand il ne bouge pas
+- "droite" quand il va a droite
+- "gauche" quand il va...
+
+Je peux alors penser a stocker la liste des images correspondant a une direction dans un dictionnaire python.
+
+on aura ainsi un paquet d'image accessible facilement en fonction de sa direction.
+
+| direction | Liste d'images |
+|:-:|:-:|
+| repos | [repos0] |
+| droite| [droite0, droite1, droite2]|
+| gauche| [gauche0, gauche1, gauche2]|
+
+Ceci est relativement vite fait, dans ma fonction lireImages
+
+```python
+def lireImages():
+  images = {}
+  images["fond"] = pygame.image.load("background.jpg").convert()
+  images["perso"] = pygame.image.load("perso.png").convert_alpha()
+  images["balle"] = pygame.image.load("balle.png").convert_alpha()
+
+  images["flame"] = []
+  for i in range(4):
+    images["flame"].append(pygame.image.load("flameBall_"+str(i)+".png").convert_alpha())
+
+  dicoWizard={}
+  dicoWizard["droite"]=[]
+  for i in range(3):
+    dicoWizard["droite"].append(pygame.image.load("wizard_right_"+str(i)+".png").convert_alpha())
+
+  dicoWizard["gauche"]=[]
+  for i in range(3):
+    dicoWizard["gauche"].append(pygame.image.load("wizard_right_"+str(i)+".png").convert_alpha())
+
+  dicoWizard["repos"]=[]
+  dicoWizard["repos"].append(pygame.image.load("wizard_down_0.png").convert_alpha())
+
+  images["wizard"]=dicoWizard
+
+  return images
+```
+
+Bon... ca pique un peu, mais ca va aller. (Dans *toutBiten.py*, j'ai de plus
+augmenté la taille des images pour que ce soit plus joli...)
+
+On souhaite maintenant mettre en place ces animations pour le joueur.
+Pour le moment, notre joueur est de la classe *Joueur*,
+qui hérite de la classe *ElementGraphique* (celle de l'image unique).
+
+Or notre joueur va devoir avoir une animation (comme dans la classe
+*ElementAnime*), mais en plus cette animation va changer quand il change de
+direction...
+
+Normalement, vous devriez en déduire vous même qu'on va créer une nouvelle
+classe (*ElementAnimeDir*) qui va hériter de *ElementAnime*.
+On dit aussi que la classe *ElementAnimeDir* dérive de la classe *ElementAnime*.
+
+Je passe au constructeur ce dictionnaire...
+```python
+class ElementAnimeDir(ElementAnime):
+
+    def __init__(self, window, images_all_dir, x=0, y=0):
+```
+
+puis je construit un *ElementAnime* avec la liste d'image de la position "repos"
+```python
+      super().__init__(window,images_all_dir["repos"],x,y)
+```
+Et je stocke mes variables utiles : le dictionnaire d'image et la direction
+actuelle du joueur. je stocke aussi la direction précédente, ca servira plus
+loin.
+
+```python
+      self.images_all_dir = images_all_dir
+      self.direction="repos"
+      self.old_direction="repos"
+```
+
+On peut tester ceci dans notre main, avec un joueur crée comme
+un *ElementAnimeDir*.
+
+```python
+joueur = ElementAnimeDir(fenetre,images["wizard"], 20, 50)
+```
+
+Evidemment, notre joueur ne va pas vraiment changer de
+direction, mais le programme doit tourner... (et oui, il est tout petit...)
+
+
+### prise en compte des directions.
+
+Pour faire les choses proprement, je vais surcharger la méthode afficher de
+ma classe *ElementAnimeDir* pour qu'elle fasse le changement d'animation au
+besoin...
+
+l'idée est simple :
+Quand on doit l'afficher, on regarde
+si la nouvelle direction de l'element est différente de l'ancienne :
+1. on change d'animation. L'animation en cours est l'attribut *self.images* des
+*ElementAnim*. c'est lui que je vais modifier.
+
+2. De plus, je mémorise que j'ai déja changé de direction en placant
+la direction actuelle dans *self.old_direction*
+
+3. Je remet mon numéro d'animation a 0, car toutes les listes d'animation n'ont
+pas la meme taille
+
+```python
+def afficher(self) :
+    # l'element a changé de direction
+    if self.old_direction != self.direction:
+        # je mets la nouvelle liste d'images a utiliser dans images.
+        self.images = self.images_all_dir[self.direction]
+
+        # je remet le numéro d'anim a 0
+        self.numAnim=0
+
+        # je mémorise la direction actuelle comme déja commencée
+        self.old_direction = self.direction:
+
+    # et je demande l'affichage de l'animation en cours.
+    super().afficher()
+```
+
+
+Ca c'est bon. On voit que de l'exterieur, des que l'attribut *direction*
+va changer, tout devrait bien se passer.
+Qui sait quand la direction doit changer ?
+la méthode *deplacer* du joueur. C'est elle que je dois modifier.
+
+Dans le fichier *toutBiten.py*; j'ai refais une classe *Joueur1* pour que le code
+des programmes précédents continue a fonctionner, mais dans la vraie vie, je
+modifierais ma classe joueur...
+
+Voici donc ma classe Joueur1 :
+
+```python
+class Joueur1(ElementAnimeDir):
+    def __init__(self, window, img, x=0, y=0):
+        super().__init__( window, img, x, y)
+        self.vies = 3
+        self.vitesse = 5
+
+    def deplacer(self, touches):
+        self.direction="repos"
+        if touches[pygame.K_LEFT] :
+            self.direction="gauche"
+            self.rect.x-= self.vitesse
+        if touches[pygame.K_RIGHT] :
+            self.rect.x+= self.vitesse
+            self.direction="droite"
+```
+
+dans mon main, la création du joueur devient :
+
+```python
+joueur = Joueur1(fenetre,images["wizard"], 20, 50)
+```
+
+et quelque part dans la boucle,
+je dois demander au joueur de se déplacer...
+
+```python
+joueur.deplacer(touches)
+```
+
+Et voila.

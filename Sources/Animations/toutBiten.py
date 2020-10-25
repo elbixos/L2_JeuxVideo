@@ -41,6 +41,37 @@ class ElementAnime(ElementGraphique):
 
         super().afficher()
 
+'''
+La classe des elements qui aparaissent sous forme d'une animation d'images
+differentes en fonction de leur direction
+'''
+class ElementAnimeDir(ElementAnime):
+
+    def __init__(self, window, images_all_dir, x=0, y=0):
+        # Pour construire un element animé, on construit
+        # d'abord un element graphique (avec la premiere image de la liste)
+        super().__init__(window,images_all_dir["repos"],x,y)
+
+        # On ajoute toutes les variables utiles a la gestion de l'animation
+        self.images_all_dir = images_all_dir
+        self.direction="repos"
+        self.old_direction="repos"
+
+    def afficher(self) :
+        # l'element a changé de direction
+        if self.old_direction != self.direction:
+            # je mets la nouvelle liste d'images a utiliser dans images.
+            self.images = self.images_all_dir[self.direction]
+
+            # je remet le numéro d'anim a 0
+            self.numAnim=0
+
+            # je mémorise la direction actuelle comme déja commencée
+            self.old_direction = self.direction
+
+        # et je demande l'affichage de l'animation en cours.
+        super().afficher()
+
 
 '''
 La classe des balles
@@ -106,12 +137,28 @@ class Teleguide(ElementGraphique):
 
 class Joueur(ElementGraphique):
     def __init__(self, window, img, x=0, y=0):
-        ElementGraphique.__init__(self, window, img, x=0, y=0)
+        super().__init__(window, img, x, y)
         self.vies = 3
         self.vitesse = 5
 
     def deplacer(self, touches):
-        if touches[pygame.K_UP] :
+        if touches[pygame.K_LEFT] :
+
             self.rect.x-= self.vitesse
-        if touches[pygame.K_DOWN] :
+        if touches[pygame.K_RIGHT] :
             self.rect.x+= self.vitesse
+
+class Joueur1(ElementAnimeDir):
+    def __init__(self, window, img, x=0, y=0):
+        super().__init__( window, img, x, y)
+        self.vies = 3
+        self.vitesse = 5
+
+    def deplacer(self, touches):
+        self.direction="repos"
+        if touches[pygame.K_LEFT] :
+            self.direction="gauche"
+            self.rect.x-= self.vitesse
+        if touches[pygame.K_RIGHT] :
+            self.rect.x+= self.vitesse
+            self.direction="droite"
