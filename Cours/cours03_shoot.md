@@ -99,6 +99,14 @@ Tout ceci est réuni dans deux fichiers :
 notez que le fichier *toutBiten.py* contient déja toutes les classes que nous
 utiliserons plus bas dans ce cours...
 
+Si je résume, je n'ai globalement que deux classes dans mon jeu :
+
+![diagramme uml](diagInit.bmp)
+
+- Le fond, les balles sont des **instances** de *ElementGraphique*
+- le joueur est une instance de *Joueur*
+
+
 ## Transformations des balles en animations.
 
 Je veux modifier mon code pour que les balles qui aparaissent soient maintenant animées. **Mais**, je ne veux pas tout casser.
@@ -278,6 +286,21 @@ le fichier nécessaire est ici :
 [mainAnime2.py](../Sources/Animations/mainAnime1.py). Les classes, vous les avez déja
 dans *toutBiten.py*
 
+Si je résume, j'ai maintenant 3 classes dans mon jeu :
+
+![diagramme UML](diag1.bmp)
+
+- le fond est un *ElementGraphique*
+- le joueur est un *Joueur*
+- les balles sont des *ElementAnime*
+
+Quand on demande à une des ces variables de s'afficher :
+- le fond est un *ElementGraphique*, il utilise la méthode afficher des *ElementGraphique*.
+- joueur est un *Joueur*, il utilise aussi la méthode *afficher* des *ElementGraphique*
+- les balles sont des *ElementAnime*, elles utilisent la méthode *afficher* des *ElementAnime*.
+
+Seul le joueur possède une méthode *deplacer*
+
 #### Ajout de fonctionnalites pour les balles.
 
 Si maintenant je veux creer des balles qui soient animées et qui bougent, le plus simple est de créer une classe *Balle*.
@@ -331,11 +354,68 @@ le fichier nécessaire est ici :
 [mainAnime2.py](../Sources/Animations/mainAnime2.py). Les classes, vous les avez déja
 dans *toutBiten.py*
 
-#### Conclusion
+Si je reprends mon diagramme de classes, il a maintenant cette tête ci :
+
+![diagramme UML](diag2.bmp)
+
+
+## Conception des hierarchies de classes
 
 Tout le jeu, en programmation Objet, consiste a créer les "bonnes classes", celles dont les objets vont hériter pour obtenir rapidement les bonnes méthodes et les bons attributs.
 
 Il convient donc de réfléchir un peu à qui doit hériter de quoi...
 
-pour le moment, mon graphe des classes est comme suit :
-... TODO ...
+En gros, pour commencer, je vais réfléchir en terme d'animations pour préparer mes classes.
+
+dans le jeu, il va y avoir :
+
+- des éléments affichés comme des images uniques. Ceux ci vont dériver de *ElementGraphique*.
+- des éléments animés. Ceux ci vont dériver de *ElementAnime*.
+
+Voyons quelques applications :
+
+### cas 1
+
+Si dans mon jeu, je veux 4 sortes de monstres, qui se déplacent tous verticalement, avec seulement des images différentes et un nombre de hp différents,
+je pourrais créer une classe unique pour ces monstres (qui va mettre en oeuvre le nombre de hp et le déplacement).
+
+Si ces monstres doivent être animés, cette classe devra hériter de *ElementAnime*, sinon, elle héritera de *ElementGraphique*.
+
+### cas 2
+
+Si dans mon jeu, je veux toujours 4 sortes de monstres, avec des déplacements différents. De plus, certains tirent et d'autres non.
+Je pourrais faire 2 choses :
+
+### possibilité 1
+
+1. Je crée une classe unique *Monstre*, avec un attribut *type* choisi à l'initialisation, pour distinguer les monstres entre eux. On peut aussi penser à un attribut *peuxTirer* (True ou False) pour savoir s'il tire ou pas.
+2. la méthode déplacer (commune) regarde le *type* et, en fonction de sa valeur calcule le déplacement à appliquer.
+3. la méthode tirer (commune) regarde l'attribut *peuxTirer* du monstre et en fonction de sa valeur, le fait tirer ou pas.
+
+Le main peut ainsi demander à tous les monstres de se deplacer et de tirer, sous la meme forme, mais chacun le fera a sa sauce.
+
+### possibilité 2
+
+1. Je crée une classe *Monstre* avec comme attribut principal les hp des monstres.
+2. Je cree une classe par type de monstre (*Monstre1*, *Monstre2*,...), qui hérite de *Monstre*, et qui met en place les déplacements différents.
+
+A quoi sert la classe commune dans ce cas ?
+A deux choses :
+- Eviter d'avoir a rajouter un attribut hp a chaque classe de monstre.
+- Si vous voulez par exemple que certains de vos monstres puissent tirer, vous pourriez creer une fonction *tirer* dans cette classe, qui ne fait rien.
+  - dans votre main, vous dites a tout vos monstres de tirer.
+  - dans les classes des monstres qui doivent vraiment tirer, vous **surchargez** la méthode tirer pour qu'ils tirent vraiment.
+
+### Que choisir
+Ca dépend. En gros :
+
+- si vos fonctions *deplacer* n'utilisent pas les memes parametres, la possibilité 1 va vous forcer à creer une multitude d'attributs différents pour gérer chacun des déplacements. Par exemple (dx, dy) pour ceux qui vont tout droit et (t, centerx,centery, truc, p, q) pour ceux qui suivent une courbe de lissajous. Votre classe va devenir un gros fourre tout.
+- si vos classes ne se distinguent que peu, la possibilité 2 va vous amener à créer une palanquée de classes complêtement inutiles.
+
+Pour le coup, il vous faudrait avoir plus d'expérience pour savoir quel choix faire. Ce projet a pour ambition de vous faire toucher du doigt ces difficultés...
+
+## Animation directionnelle.
+
+
+
+Imaginons que je veuille des animations différentes en fonction de la direction que prend mon personnage...
