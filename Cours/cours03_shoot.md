@@ -205,10 +205,17 @@ Reste à s'occuper de l'affichage de l'animation.
 Comme je veux changer le moins possible mon code, cette classe va aussi avoir une méthode *afficher* sans argument, comme *ElementGraphique*. On dit qu'on **surcharge** (override) la méthode *afficher*.
 
 Comme la fonction *afficher* est appelée à chaque tour de boucle
-par le main, c'est elle qui va incrémenter le timer. Si celui ci dépasse une certaine valeur, on change l'image courante (et on remet le timer à 0).
+par le main, c'est elle qui va incrémenter le timer.
 
-Puis, on affiche l'image courante, en appelant la méthode afficher de la **classe parente** de *ElementAnime*.
-C'est bien *
+Si le timer dépasse une certaine valeur, on change d'image à afficher :
+
+1. On remet le timer a 0
+2. On passe a l'image suivante dans le tableau.
+3. Si j'ai fini toutes les images, je recommence a l'image 0
+
+en fait, je gère simplement un numéro correspondant à l'image courante dans mon tableau, et je place cette image dans *self.image*
+
+Puis, on affiche l'image courante.
 
 Le code qui suit est relativement simple, sauf la derniere ligne que je vais expliquer plus bas... dites moi si vous avez du mal.
 
