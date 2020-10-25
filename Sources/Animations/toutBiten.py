@@ -15,6 +15,54 @@ class ElementGraphique():
     def afficher(self) :
         self.window.blit(self.image, self.rect)
 
+'''
+La classe des elements qui aparaissent sous forme d'une animation d'images
+'''
+class ElementAnime(ElementGraphique):
+
+    def __init__(self, window, images, x=0, y=0):
+        # Pour construire un element animé, on construit
+        # d'abord un element graphique (avec la premiere image de la liste)
+        super().__init__(window,images[0],x,y)
+
+        # On ajoute toutes les variables utiles a la gestion de l'animation
+        self.images = images
+        self.timer = 0  # un timer pour l'animation
+        self.numAnim = 0 # le numero de l'image courante
+
+    def afficher(self) :
+        self.timer+=1
+        if self.timer > 10: # on change d'image tous les 10 tours de boucles...
+            self.timer = 0
+            self.numAnim+=1
+            if self.numAnim >= len(self.images):
+                self.numAnim=0
+            self.image = self.images[self.numAnim]
+
+        super().afficher()
+
+
+'''
+La classe des balles
+'''
+class Balle(ElementAnime):
+
+    def __init__(self, window, images, x=0, y=0):
+        # Pour construire un element animé, on construit
+        # d'abord un element animé
+        super().__init__(window,images,x,y)
+
+        self.t = 0.0
+        self.truc = 10
+        self.centerx = x
+        self.centery = y
+
+    def deplacer(self):
+        self.t+=1.0
+
+        self.rect.x = 100*math.cos(self.t/self.truc) + self.centerx
+        self.rect.y = 100*math.sin(self.t/self.truc) + self.centery
+
 
 class DeplacementLineaire(ElementGraphique):
     def __init__(self, window, img, x=0, y=0):
@@ -50,10 +98,9 @@ class Teleguide(ElementGraphique):
         dy = target.rect.y - self.rect.y
 
         dist = math.sqrt(dx*dx + dy*dy)
-        if dist != 0
+        if dist !=0:
             dx= dx / dist * self.vitesse
             dy = dy /dist * self.vitesse
-            
         self.rect.x += dx
         self.rect.y += dy
 

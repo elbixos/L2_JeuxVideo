@@ -1,0 +1,7 @@
+digraph mesClasses {
+     ElementGraphique -> ElementAnime;
+     ElementAnime -> Balle
+
+
+     b -> d;
+}
