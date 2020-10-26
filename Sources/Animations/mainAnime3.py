@@ -33,7 +33,7 @@ def lireImages():
 
 def ajouterBalles(balles, compteur, fps, duree):
   if compteur/fps % duree==0:
-    balles.append(ElementGraphique(fenetre,images["balle"],random.randint(0,largeur), random.randint(0,hauteur)))
+    balles.append(Balle(fenetre,images["flame"],random.randint(0,largeur), random.randint(0,hauteur)))
 
 
 ## Initialisation de la fenetre et crÃ©ation
@@ -75,6 +75,10 @@ while continuer == True :
 
     # on ajoute des balles toutes les 1 secondes.
     ajouterBalles(balles, time, fps, 1)
+
+    for b in balles:
+        b.deplacer()
+
 
     joueur.deplacer(touches)
 
