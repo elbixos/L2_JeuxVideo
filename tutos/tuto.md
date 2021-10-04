@@ -9,7 +9,7 @@ que j'ai faites en cours pour bien débuter la programmation d'un jeu vidéo en 
 **Attention** :
 1. Je suppose que les pré-requis ce projet sont remplis. Re-regardez [ce lien](../README.md) pour vous en assurer.
 
-2. [ce même lien](../README.md) vous donne aussi accès à l'archive des fichiers sur lesquels nous allons travailler. Téléchargez l'archive et décompressez la, vous modifierez les fichiers pour vos tests.
+2. [ce lien](https://elbixos.github.io/L1_OptionInfo/Projets/JeuVideo/Sources/tutos.zip) vous donne aussi accès à l'archive des fichiers sur lesquels nous allons travailler. Téléchargez l'archive et décompressez la, vous modifierez les fichiers pour vos tests.
 
 Arrivés au terme de ce document, si vous suivez effectivement mes propositions, vous aurez déja fait une partie du TP. Il serait dommage de vous en priver.
 
